@@ -11,7 +11,7 @@ files.
    The change made in the template must be referenced in the commit message.
 
 2. The change is processed (use of templates, ..) and added to the corresponding
-   directories (``k8s``).
+   directories (``k8s``, ``github``).
 
 3. The changes can then be applied to all repositories using
    [Gilt](https://github.com/metacloud/gilt).

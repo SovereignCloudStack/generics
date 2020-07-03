@@ -7,6 +7,6 @@
     - src: github/workflows/*.yml
       dst: .github/workflows/
     - src: docs/LICENSE
-      dst: LICENSE
+      dst: ./LICENSE
     - src: docs/requirements.txt
-      dst: requirements.txt
+      dst: ./requirements.txt

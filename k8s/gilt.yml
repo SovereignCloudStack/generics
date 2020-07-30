@@ -6,5 +6,9 @@
       dst: .github/
     - src: github/workflows/*.yml
       dst: .github/workflows/
+    - src: k8s/render-template.py
+      dst: scripts/render-template.py
     - src: k8s/.gitignore
-      dst: ./.gitignore
+      dst: .gitignore
+      post_commands:
+        - python3 scripts/render-template README.md

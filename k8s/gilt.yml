@@ -7,12 +7,12 @@
     - src: github/workflows/*.yml
       dst: .github/workflows/
     - src: k8s/gilt.yml
-      dst: gilt.yml
+      dst: ./gilt.yml
     - src: k8s/README.md
-      dst: README.md
+      dst: ./README.md
     - src: k8s/render-template.py
-      dst: scripts/render-template.py
+      dst: ./render-template.py
     - src: k8s/.gitignore
-      dst: .gitignore
+      dst: ./.gitignore
       post_commands:
-        - python3 scripts/render-template README.md
+        - python3 render-template.py README.md

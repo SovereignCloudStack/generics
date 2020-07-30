@@ -6,3 +6,5 @@
       dst: .github/
     - src: github/workflows/*.yml
       dst: .github/workflows/
+    - src: k8s/.gitignore
+      dst: ./.gitignore

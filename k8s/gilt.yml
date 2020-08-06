@@ -25,4 +25,6 @@
       post_commands:
         - ./create-test-stubs.sh
         - python3 render-template.py README.md
+        - mkdir -p envs/ci-testing
+        - touch envs/ci-testing/flux-patch.yaml
         - rm render-template.py create-test-stubs.sh

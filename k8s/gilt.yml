@@ -15,5 +15,8 @@
     - src: k8s/.gitignore
       dst: ./
       post_commands:
+        - mkdir -p test
+        - sh -c 'stat test/wait >/dev/null 2>/dev/null || echo "#!/bin/bash" > test/wait && chmod +x test/wait'
+        - sh -c 'stat test/test >/dev/null 2>/dev/null || echo "#!/bin/bash" > test/test && chmod +x test/test'
         - python3 render-template.py README.md
         - rm render-template.py

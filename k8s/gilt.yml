@@ -14,8 +14,6 @@
       dst: ./README.md
     - src: k8s/.flux.yaml
       dst: ./
-    - src: k8s/envs
-      dst: ./envs
     - src: k8s/render-template.py
       dst: ./render-template.py
     - src: k8s/create-test-stubs.sh

@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  integration-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+    - uses: actions/checkout@v2
+    - uses: engineerd/setup-kind@v0.4.0
+      with:
+        version: v0.8.1
+    - name: Setup fluxctl # Following steps are based on fluxctl-action docs
+      uses: fluxcd/fluxctl-action@v1.19.0
+    - name: Install Flux
+      run: |
+        kubectl create ns flux
+        fluxctl install \
+        --git-path=envs/kind \
+        --git-branch=${GITHUB_REF#refs/heads/} \
+        --git-readonly=true \
+        --registry-disable-scanning=true \
+        --git-email=invalid@scs.community \
+        --git-url=https://github.com/$GITHUB_REPOSITORY.git \
+        --manifest-generation=true \
+        --namespace=flux | kubectl apply -f -
+    - name: Verify install
+      run: kubectl -n flux rollout status deploy/flux --timeout=1m
+    - name: Sync git with cluster
+      env:
+        FLUX_FORWARD_NAMESPACE: flux
+      run: fluxctl sync
+    - name: Wait for service to be Ready
+      run: ./test/wait
+    - name: Check if service is working as expected
+      run: ./test/test
+    - name: Fetch fluxcd logs
+      if: ${{ always() }}
+      run: kubectl logs -n flux deploy/flux

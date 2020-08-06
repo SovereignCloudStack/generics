@@ -21,4 +21,4 @@
       post_commands:
         - ./create-test-stubs.sh
         - python3 render-template.py README.md
-        - rm render-template.py
+        - rm render-template.py create-test-stubs.sh

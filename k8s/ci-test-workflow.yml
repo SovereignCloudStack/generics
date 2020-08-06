@@ -21,7 +21,7 @@ jobs:
       run: |
         kubectl create ns flux
         fluxctl install \
-        --git-path=envs/kind \
+        --git-path=envs/ci-testing \
         --git-branch=${GITHUB_REF#refs/heads/} \
         --git-readonly=true \
         --registry-disable-scanning=true \

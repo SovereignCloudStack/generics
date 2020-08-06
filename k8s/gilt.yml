@@ -16,3 +16,4 @@
       dst: ./
       post_commands:
         - python3 render-template.py README.md
+        - rm render-template.py

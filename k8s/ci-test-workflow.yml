@@ -42,3 +42,7 @@ jobs:
     - name: Fetch fluxcd logs
       if: ${{ always() }}
       run: kubectl logs -n flux deploy/flux
+    - name: Fetch helm-operator logs if present
+      if: ${{ always() }}
+      run: |
+        kubectl get deploy -n flux helm-operator && kubectl logs -n flux deploy/helm-operator || echo 'helm-operator not present'

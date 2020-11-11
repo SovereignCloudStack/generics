@@ -12,6 +12,17 @@ jobs:
     timeout-minutes: 15
     steps:
     - uses: actions/checkout@v2
+    - name: Run conftest
+      uses: stefanprodan/kube-tools@v1
+      with:
+        kubectl: 1.18.2
+        kustomize: 3.5.5
+        command: |
+          set -x
+          set +e
+          kustomize build envs/ci-testing | conftest test --update github.com/instrumenta/policies.git//kubernetes - -o json > result.json || echo "conftest failed!"
+          set -e
+          cat result.json | jq '.[0].failures[].msg' | xargs printf "::warning::%s\n"
     - uses: engineerd/setup-kind@v0.4.0
       with:
         version: v0.8.1

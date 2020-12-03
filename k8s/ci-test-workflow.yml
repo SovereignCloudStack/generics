@@ -27,7 +27,7 @@ jobs:
       with:
         version: v0.8.1
     - name: Setup fluxctl # Following steps are based on fluxctl-action docs
-      uses: fluxcd/fluxctl-action@v1.19.0
+      uses: fluxcd/fluxctl-action@v1.21.0
     - name: Install Flux
       run: |
         kubectl create ns flux

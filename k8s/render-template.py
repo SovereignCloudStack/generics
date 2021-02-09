@@ -14,6 +14,7 @@ result = template.render({
     'name_path': information['name_path'],
     'name_description': information.get('name_description', information['name_path']),
     'attributions': information.get('attributions', {}),
+    'references': information.get('references', []),
     'appendix': information.get('appendix', '')
 })
 
